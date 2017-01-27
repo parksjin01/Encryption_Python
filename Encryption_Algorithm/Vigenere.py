@@ -3,8 +3,11 @@ import string
 
 def encryption(file_name, key_len=10, key=[]):
     alphabet = string.ascii_letters
-    with open(file_name, 'r') as f:
-        data = f.read()
+    try:
+        with open(file_name, 'r') as f:
+            data = f.read()
+    except:
+        data = file_name
     data = data.lower()
     with open(file_name[:-4]+'_cipher.txt', 'w') as f:
         key_idx = 0
