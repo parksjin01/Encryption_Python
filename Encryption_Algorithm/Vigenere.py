@@ -1,16 +1,19 @@
 import random
 import string
 
-def encryption(file_name, key_len=10):
+def encryption(file_name, key_len=10, key=[]):
     alphabet = string.ascii_letters
     with open(file_name, 'r') as f:
         data = f.read()
     data = data.lower()
     with open(file_name[:-4]+'_cipher.txt', 'w') as f:
-        key = []
         key_idx = 0
-        for i in range(key_len):
-            key.append(random.randrange(1, 25))
+        if key == []:
+            key = []
+            for i in range(key_len):
+                key.append(random.randrange(1, 25))
+        else:
+            key_len = len(key)
         for alpha in data:
             if alpha in alphabet:
                 alpha = ord(alpha) + key[key_idx%key_len]
@@ -43,5 +46,5 @@ def decryption(file_name, key):
                 f.write(chr(alpha))
             else:
                 f.write(alpha)
-key = encryption('/Example_Text/plain.txt', 1)
-decryption('/Example_Text/plain_cipher.txt', key)
+key = encryption('plain.txt', 1, [2])
+decryption('plain_cipher.txt', key)
