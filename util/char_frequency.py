@@ -1,3 +1,5 @@
+import string
+
 def word_frequency(file):
     word = {}
     ascii = string.ascii_letters
